@@ -13,15 +13,21 @@ function App() {
     postalCode:"",
     comments:false,
     candidates:false,
-    offers:false
+    offers:false,
+    pushNotification:""
   });
   function changeHandler(event){
     const{name, value, checked, type}=event.target;
     setFormData((prev)=>({...prev, [name]: type==="checkbox" ? checked:value}))
   }
+  function submitHandler(event){
+    event.preventDefault();
+    console.log("Printing Data");
+    console.log(formData);
+  }
   return (
     <div className="App">
-        <form >
+        <form onSubmit={submitHandler}>
           <label htmlFor="firstName">First Name</label>
           <br />
           <input type="text" name='firstName' placeholder='Darshan' value={formData.firstName} id='firstName' onChange={changeHandler}/>
@@ -128,7 +134,7 @@ function App() {
           <input type="radio" id="pushNothing" name="pushNotification" value="No Push Notification" onChange={changeHandler} />
           <label htmlFor="pushNothing">No Push Notification</label>
         </fieldset>
-
+        <button>Save</button>
         </form>
     </div>
   );
